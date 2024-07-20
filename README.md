@@ -1,9 +1,5 @@
 # SOLANA
 
-很久没写东西了，今日终得回归！
-
-
-
 学习资源：在官方的网址（[点击](https://solana.com/developers)）下面有很多不同类型的教程，可以根据需求自行选择：
 
 1. **面向EVM开发者（快速转型）**：https://www.rareskills.io/solana-tutorial
