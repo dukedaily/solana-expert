@@ -1,15 +1,9 @@
-# SOLANA
+# SOLANA EXPERT
 
-学习资源：在官方的网址（[点击](https://solana.com/developers)）下面有很多不同类型的教程，可以根据需求自行选择：
+This repository is ideal for developers with some experience in Ethereum who want to expand their blockchain skills to Solana.
 
-1. **面向EVM开发者（快速转型）**：https://www.rareskills.io/solana-tutorial
-2. 零基础：https://www.soldev.app/course
+We will kick off our Solana journey with this tutorial: [RareSkills Solana Tutorial](https://www.rareskills.io/solana-tutorial) and build our projects along the way.
 
+This is the twin sister of my other Solidity tutorial, which has garnered over 1.3K stars: [Solidity Expert](https://github.com/dukedaily/solidity-expert).
 
-
-官方文档：
-
-1. 手册：https://solanacookbook.com/
-2. 文档：https://solana.com/docs
-3. Error debug: https://solana-labs.github.io/solana-web3.js/modules.html
-4. Error debug: https://solana.stackexchange.com/
+Hoping to achieve similar success on Solana as well. So, are you ready? Better buckle up—LFG!
