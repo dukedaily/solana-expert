@@ -1,6 +1,5 @@
 # Arithmetic_Types
 
-original: https://www.rareskills.io/post/rust-arithmetic-operators
 
 ![solana calculator](./assets/935a00_d380d746614c490b9722b0bd3c1ddf0d~mv2.jpg)
 
@@ -208,4 +207,6 @@ codegen-units = 1
 
 ## Links:
 
+- original url: https://www.rareskills.io/post/rust-arithmetic-operators
+- source_code: https://github.com/dukedaily/solana-expert-code/tree/day_2
 - float: https://solana.com/docs/programs/limitations#float-rust-types-support

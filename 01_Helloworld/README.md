@@ -1,6 +1,5 @@
 # HELLO WORLD
 
-original url: https://www.rareskills.io/post/hello-world-solana
 
 ![Solana Hello World](./assets/935a00_8b1bf6c7a2ec4a7a991c2334a103577c~mv2.jpg)
 
@@ -132,3 +131,7 @@ Signature: xTrkhn7tad5tMMS9dn3ZA12EtR5LsoLaUYrUjN8gjQZYMkBTs55LVGQS3dLuKbRmMoXoW
 - Rustc：rust编译器
 - Anchor：solana开发框架
 
+
+## Links
+- original url: https://www.rareskills.io/post/hello-world-solana
+- source_code: https://github.com/dukedaily/solana-expert-code/tree/day_1
