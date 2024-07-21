@@ -131,7 +131,7 @@ Signature: xTrkhn7tad5tMMS9dn3ZA12EtR5LsoLaUYrUjN8gjQZYMkBTs55LVGQS3dLuKbRmMoXoW
 
 - Cargo：rust包管理工具
 - Rustc：rust编译器
-- Anchor：solana开发框架
+- Anchor：[solana开发框架](https://www.anchor-lang.com/)
 
 
 ## Links

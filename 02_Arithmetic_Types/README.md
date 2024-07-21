@@ -38,7 +38,21 @@ run command below to create a new program under the same project
 anchor new day_2
 ```
 
-Current directory will looks like:
+Anchor will help us to create a new program id once we execute this new command.
+
+![image-20240721125015964](./assets/image-20240721125015964.png)
+
+and apply this to the new program within the soucecode.
+
+![image-20240721125105216](./assets/image-20240721125105216.png)
+
+it will fail to deploy if these two places are not match, if so, it can be easily fix by executing the sync command
+
+```sh
+anchor keys sync
+```
+
+Currently, the directory will looks like:
 
 ```sh
 ├── programs
