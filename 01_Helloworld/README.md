@@ -59,6 +59,8 @@ Commitment: confirmed
 solana-test-validator
 ```
 
+this command would create a local folder to `test-ledger`, it would store all the simulating data, and if you run this command again, be sure to execute at the same level as this folder.
+
 ### Sync up
 
 ```sh
