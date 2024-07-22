@@ -46,7 +46,7 @@ this command will create an default project:
 
 please note: there is no `constructor`in solana program. the default func of `initialize`is automatically created by `Anchor`framework, it is just a common function, same as any arbitrary customized function: `pub fn test1()`
 
-```ts
+```rust
 use anchor_lang::prelude::*;
 
 declare_id!("9qfovSZQtZ3VkgCTiDDWuMCpkPyxt3HAcHh19MiX6pGU");

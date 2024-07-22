@@ -26,7 +26,7 @@ anchor new day_3
 
 update `day_3/src/lib.rs` as below:
 
-```ts
+```rust
 use anchor_lang::prelude::*;
 
 // this id would be generated automatically by the new command
@@ -105,7 +105,7 @@ Open `day_3.json` and take a look at the checkpoints from: 1~4
 
 add two more functions to `day_3/src/lib.rs` and build again.
 
-```ts 
+```rust
     pub fn add(ctx: Context<Initialize>, a: u64, b: u64) -> Result<()> {
       let sum = a + b;
       msg!("Sum is {}", sum);  
@@ -143,7 +143,7 @@ anchor new day_3_1
 
 update the code to:
 
-```ts
+```rust
 use anchor_lang::prelude::*;
 
 declare_id!("Ab8YxzsdF4WQnbzxEReNF7qa7P7Jz8zBnXjbiqRaHg4x");

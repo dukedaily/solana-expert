@@ -25,7 +25,7 @@ anchor new day_4
 
 update the code of file:` day_4/src/lib.rs` to: 
 
-```ts
+```rust
 use anchor_lang::prelude::*;
 
 declare_id!("5q5xqHhCFFtLpBSL7byhLihBdcjXZYDqjyfB8QZE4BGR");
