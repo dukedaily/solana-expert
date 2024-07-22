@@ -215,3 +215,11 @@ Logs and Test results:
 1. `error!` and `require!`are the same, and both of them won't revert the tx, this is quite to solidity, be sure of awareness.
 2. we can fetch the revert under try-catch block.
 3. the `msg!`won't be printed if the function return an error.
+
+
+
+## Links
+
+- day4 original article: https://www.rareskills.io/post/solana-require-macro
+- source code: https://github.com/dukedaily/solana-expert-code/tree/day_4
+

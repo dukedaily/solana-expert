@@ -217,3 +217,9 @@ you can stroll up and see the `accounts` is an empty array in `day_3.json` as th
 1. There is no concept of  `Contructor` function in solana
 2. IDL is the same as ABI in solidity
 
+
+
+## Links
+
+- day3 oritinal article : https://www.rareskills.io/post/anchor-idl
+- source code: https://github.com/dukedaily/solana-expert-code/tree/day_3
