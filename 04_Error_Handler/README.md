@@ -210,7 +210,7 @@ Logs and Test results:
 
 
 
-## Key Takeaway
+## Key Takeaways
 
 1. `error!` and `require!`are the same, and both of them won't revert the tx, this is quite to solidity, be sure of awareness.
 2. we can fetch the revert under try-catch block.

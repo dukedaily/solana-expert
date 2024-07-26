@@ -219,7 +219,11 @@ codegen-units = 1
 
 
 
-## Links:
+## Key Takeaways
+
+
+
+## Links
 
 - day2 original article: https://www.rareskills.io/post/rust-arithmetic-operators
 - source_code: https://github.com/dukedaily/solana-expert-code/tree/day_2

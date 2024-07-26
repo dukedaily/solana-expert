@@ -163,7 +163,7 @@ Signature: xTrkhn7tad5tMMS9dn3ZA12EtR5LsoLaUYrUjN8gjQZYMkBTs55LVGQS3dLuKbRmMoXoW
 
 
 
-## Relationship
+## Key Takeaways
 
 - Cargo：rust package managem tool
 - Rustc：rust complier
