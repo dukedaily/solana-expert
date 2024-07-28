@@ -295,15 +295,15 @@ The code fails to compile with the following error:
 
 The output of max() is not an integer due to the corner case that the vector v might be empty.
 
-To handle this corner case, Rust returns an Option instead. An Option is an enum which can contain either the expected value, or a special value that indicates “nothing was there.”
+To handle this corner case, rust returns an Option instead. An Option is an enum which can contain either the expected value, or a special value that indicates “nothing was there.”
 
-`option` comes together with `enum`, if the value of a type is empty, Rust will return a value of type option, create new program
+`option` comes together with `enum`, if the value of a type is empty, rust will return a value of type option, create new program
 
 ```sh
 anchor new day_7_1
 ```
 
-update with the code below.
+update with with the code below.
 
 ```rust
     pub fn option_test(ctx: Context<Initialize>) -> Result<()> {
@@ -439,6 +439,13 @@ run:
 ![image-20240728120442976](./assets/image-20240728120442976.png)
 
 ## Key Takeaways
+
+- ownership only applicable for non-copy-types.
+- borrowing (&)is to view a non-copy-type and can use (*) to get the original value.
+- Option is a special enum that supports  `empty`
+- Result is a special enum that supports `error`
+- unwrap() is to convert an either an Option or an Result back to it's orignal type, and will cause a panic if any error occurs.
+- ? is a syntax sugar for unwrap() on Result, not applicable for Option.
 
 
 
