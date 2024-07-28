@@ -116,7 +116,7 @@ To fix the code above we have two options: use the & operator or clone s1.
 
 
 
-## borrowing
+## Borrowing
 
 **To give another variable or function a view of an owned variable, we prepend it with: ** **&**.
 
@@ -162,7 +162,7 @@ a, b, c all hold a new copy of value 10, the underlying reason is that the overh
 
 ![image-20240726091005029](./assets/image-20240726091005029.png)
 
-## clone a object
+## Clone a object
 
 if a var of a non-copy-type is being borrowed, it cannot be reassigned, check the code below.
 
@@ -229,6 +229,214 @@ Interesting thing: if we only comment the `msg!`line and keep the borrowing line
 ```
 
 
+
+##  Generic types
+
+Rust also supports generic types, eliminating the need to write multiple functions for different types with the same logic.
+
+```rust
+use anchor_lang::prelude::*;
+
+declare_id!("2V4BSWLCWVP5CmrxbcpKG1bqczwgirs43euQtHDJqwDa");
+
+#[program]
+pub mod day_7 {
+    use super::*;
+ 		// The rest...
+
+    pub fn generic_type_test(ctx: Context<Initialize>) -> Result<()> {
+        let my_values1 = MyValues {
+            foo: 42,
+            bar: "hello".to_string(),
+        };
+
+        let my_values2 = MyValues {
+            foo: true,
+            bar: [1, 2, 3],
+        };
+
+        msg!("my_values1: {:?}", my_values1);
+        msg!("my_values2: {:?}", my_values2);
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct Initialize {}
+
+// derive the debug trait so we can print the struct to the console
+#[derive(Debug)]
+struct MyValues<T, U> {
+    foo: T,
+    bar: U,
+}
+```
+
+we can reuse this MyValues type on different types.
+
+![image-20240726231659108](./assets/image-20240726231659108.png)
+
+## Options
+
+```rust
+fn main() {
+	let v = Vec::from([1,2,3,4,5]);
+
+	assert!(v.iter().max() == 5);
+}
+```
+
+The code fails to compile with the following error:
+
+```js
+6 |     assert!(v.iter().max() == 5);
+  |                               ^ expected `Option<&{integer}>`, found integer
+```
+
+The output of max() is not an integer due to the corner case that the vector v might be empty.
+
+To handle this corner case, Rust returns an Option instead. An Option is an enum which can contain either the expected value, or a special value that indicates “nothing was there.”
+
+`option` comes together with `enum`, if the value of a type is empty, Rust will return a value of type option, create new program
+
+```sh
+anchor new day_7_1
+```
+
+update with the code below.
+
+```rust
+    pub fn option_test(ctx: Context<Initialize>) -> Result<()> {
+        let v = Vec::from([1, 2, 3, 4, 5]);
+        // assert!(v.iter().max() == 5); // wrong
+        assert!(v.iter().max().unwrap() == &5); // correct
+        Ok(())
+    }
+```
+
+To turn an Option into the underlying type, we use unwrap(). unwrap() will cause a panic if we received “nothing”, so we should only use it in situations where we want the panic to occur or we are sure we won’t get a empty value.
+
+## The deref Operator *
+
+as you may notice, we use `&0` instead of `0`, cos the return type of `unwrap()` is a `view`, so we need to use & ahead.
+
+```rust
+        assert!(v.iter().max().unwrap() == &5); // correct
+```
+
+to convert the view of an integer backward to a regular integer, we can use * operator to deference.
+
+```rust
+        assert!(*v.iter().max().unwrap() == 5); // correct
+```
+
+You can think of * as "undoing" a & without disturbing the original value.
+
+
+
+## Result Type
+
+An `Option` is used when we might receive something `empty`.
+
+An `Result` is used when we might receive an `error`. we'v seen this a lot inside our anchor programs.
+
+in day_4, we return either error or ok in this function
+
+![image-20240728103805491](./assets/image-20240728103805491.png)
+
+if we trace back and we will get it's definition like this:
+
+```rust
+pub enum Result<T, E> {
+    /// Contains the success value
+    #[lang = "Ok"]
+    #[stable(feature = "rust1", since = "1.0.0")]
+    Ok(#[stable(feature = "rust1", since = "1.0.0")] T),
+
+    /// Contains the error value
+    #[lang = "Err"]
+    #[stable(feature = "rust1", since = "1.0.0")]
+    Err(#[stable(feature = "rust1", since = "1.0.0")] E),
+}
+```
+
+## Operator ?
+
+The ? operator can only be ued in functions that return a `Result`as it is syntactic sugar for returning either Err or Ok.
+
+- unwrap() : can be used both on Option and Result. (will crash if there is an error occur, be careful).
+- ?: can be used only on Result.
+
+let test it, udpate the code:
+
+```rust
+use anchor_lang::prelude::*;
+use borsh::{BorshDeserialize, BorshSerialize};
+
+declare_id!("DjFyT85igx13HFU7uLuqozGaPw6HiQX31PCNLThCCspf");
+
+#[program]
+pub mod day_7_1 {
+    use super::*;
+
+    pub fn encode_and_decode(ctx: Context<Initialize>) -> Result<()> {
+        let init_person: Person = Person {
+            name: "Alice".to_string(),
+            age: 30,
+        };
+
+        let encoded_data: Vec<u8> = init_person.try_to_vec().unwrap();
+        msg!("Encoded data: {:?}", encoded_data);
+
+        let data: Person = decode(ctx, encoded_data)?;
+        msg!("Decoded data: {:?}", data);
+        Ok(())
+    }
+
+    // pub fn decode(ctx: Context<Initialize>, encoded_data: Vec<u8>) -> Result<Person> { <<--- this won't compile, why??
+    pub fn decode(ctx: Context<Initialize>, encoded_data: Vec<u8>) -> Result<(Person)> {
+        let decoded_data: Person = Person::try_from_slice(&encoded_data).unwrap();
+        Ok(decoded_data)
+        // Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct Initialize {}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct Person {
+    name: String,
+    age: u32,
+}
+```
+
+update test file:
+
+```ts
+import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { Day71 } from '../target/types/day_7_1';
+
+describe("day_7_1", () => {
+  anchor.setProvider(anchor.AnchorProvider.env());
+  const program = anchor.workspace.Day7_1 as Program<Day71>;
+
+  it("should succeed test option!", async () => {
+    const tx = await program.methods.optionTest().rpc();
+    console.log("You tx signature:", tx);
+  })
+
+  it("should succeed test ? operator!", async () => {
+    const tx = await program.methods.encodeAndDecode().rpc();
+    console.log("You tx signature:", tx);
+  })
+})
+```
+
+run:
+
+![image-20240728120442976](./assets/image-20240728120442976.png)
 
 ## Key Takeaways
 
