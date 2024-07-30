@@ -98,7 +98,7 @@ impl Speed for Boat {
 
 // Function to get the speed in km/h for any type implementing the Speed trait
 fn get_speed(transport: &dyn Speed)-> f64 {
-		return transport.get_speed_kph();
+    return transport.get_speed_kph();
 }
 
 fn main() {
@@ -113,9 +113,9 @@ fn main() {
     println!("Car Speed: {} km/h", car_speed_kph); // 96.5604 km/h
     println!("Boat Speed: {} km/h", boat_speed_kph); // 55.56 km/h
 
-  	// polymorphism
+    // polymorphism
     println!("Polymorphism Car Speed: {} km/h", get_speed(&car));
- 		println!("Polymorphism Boat Speed: {} km/h", get_speed(&boat));
+    println!("Polymorphism Boat Speed: {} km/h", get_speed(&boat));
 }
 ```
 
