@@ -127,7 +127,21 @@ output:
 
 ## Att-like macro
 
-we can use attribute-like macro to change a struct, the technique beneath the surface is `impl`
+we can use attribute-like macro to change a struct, the technique beneath the surface is `impl` we just described.
+
+we test in `rust_projects` other than anchor programs.
+
+```sh
+mkdir rust_projects
+cd rust_projects
+cargo new day_8_1
+```
+
+### remove fields from a struct
+
+
+
+### add  fields into a struct
 
 ## Derive macro
 
