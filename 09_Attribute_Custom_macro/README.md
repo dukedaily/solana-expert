@@ -134,26 +134,224 @@ we test in `rust_projects` other than anchor programs.
 ```sh
 mkdir rust_projects
 cd rust_projects
-cargo new day_8_1
+cargo new day_9_1
 ```
 
-### remove fields from a struct
+update the day_9_1/Cargo.toml as below:
 
+```toml
+[lib]
+proc-macro = true
 
+[dependencies]
+syn = {version="1.0.57",features=["full","fold"]}
+quote = "1.0.8"
+```
 
 ### add  fields into a struct
 
+we will define a attribute-like macro: `#[foo_bar_attribute]` and attach it to the simple struct below: 
+
+```rust
+struct MyStruct {
+	baz: i32
+}
+```
+
+within this macro, we will alter MyStruct by:
+
+- adding two new fields `foo` and `bar` of type i32
+- adding  a new function `double_foo` which returns twice the integer value of whatever foo is holding.
+
+update the following code to day_9_1/src/main.rs
+
+```rust
+// day_9_1/src/main.rs
+use day_9_1::foo_bar_attribute;
+
+#[foo_bar_attribute]
+struct MyStruct {
+    baz: i32,
+}
+
+fn main() {
+    let demo = MyStruct::default();
+    println!("struct is {:?}", demo);
+
+    let double_foo = demo.double_foo();
+    println!("double foo is {}", double_foo);
+}
+```
+
+create day_9_1/src/lib1.rs:
+
+```rust
+// day_9_1/src/lib1.rs
+
+// Importing necessary external crates
+extern crate proc_macro;
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemStruct};
+
+// Declaring a procedural attribute-like macro using the `proc_macro_attribute` directive
+// This makes the macro usable as an attribute
+
+#[proc_macro_attribute]
+// The function `foo_bar_attribute` takes two arguments:
+// _metadata: The arguments provided to the macro (if any)
+// _input: The TokenStream the macro is applied to
+pub fn foo_bar_attribute(_metadata: TokenStream, _input: TokenStream) -> TokenStream {
+    // Parse the input TokenStream into an AST node representing a struct
+    let input = parse_macro_input!(_input as ItemStruct);
+    let struct_name = &input.ident; // Get the name of the struct
+
+    // Constructing the output TokenStream using the quote! macro
+    // The quote! macro allows for writing Rust code as if it were a string,
+    // but with the ability to interpolate values
+    TokenStream::from(quote! {
+        // Derive Debug trait for #struct_name to enable formatted output with `println()`
+        #[derive(Debug)]
+        // Defining a new struct #struct_name with two fields: foo and bar
+        struct #struct_name {
+            foo: i32,
+            bar: i32,
+        }
+
+        // Implementing the Default trait for #struct_name
+        // This provides a default() method to create a new instance of #struct_name
+        impl Default for #struct_name {
+            // The default method returns a new instance of #struct_name
+            // with foo set to 10 and bar set to 20
+            fn default() -> Self {
+                #struct_name { foo: 10, bar: 20}
+            }
+        }
+
+        impl #struct_name {
+            // Defining a method double_foo for #struct_name
+            // This method returns double the value of foo
+            fn double_foo(&self) -> i32 {
+                self.foo * 2
+            }
+        }
+    })
+}
+
+```
+
+Result: `cargo run`
+
+![image-20240730212741245](./assets/image-20240730212741245.png)
+
+### remove fields from a struct
+
+```sh
+cd rust_projects
+cargo new day_9_2
+```
+
+Main.ts
+
+```rust
+use day_9_2::destroy_attribute;
+
+#[destroy_attribute]
+struct MyStruct {
+    baz: i32,
+    qux: i32,
+}
+
+fn main() {
+    let demo = MyStruct { baz: 3, qux: 4 };
+
+    println!("struct is {:?}", demo);
+}
+```
+
+lib.rs
+
+```rust
+// src/lib.rs
+// Importing necessary external crates
+extern crate proc_macro;
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemStruct};
+
+#[proc_macro_attribute]
+pub fn destroy_attribute(_metadata: TokenStream, _input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(_input as ItemStruct);
+    let struct_name = &input.ident; // Get the name of the struct
+
+    TokenStream::from(quote! {
+        // This returns an empty struct with the same name
+        #[derive(Debug)]
+        struct #struct_name {
+        }
+    })
+}
+```
+
+cargo run: 
+
+![image-20240730212809801](./assets/image-20240730212809801.png)
+
+we got two errors on the compliation stage, this means baz and qux are no longer belong to MyStruct as expected!!
+
 ## Derive macro
 
-This support a way to augment a struct without changing it.
+This support a way to augment a struct without changing it, a derive macro can, among other things, attach an `impl` to a struct.
+
+```rust
+struct Foo {
+	bar: i32,
+}
+
+pub fn main() {
+	let foo = Foo { bar: 3 };
+	println!("{:?}", foo);
+}
+```
+
+The code will not compile cos structs are not "printable".
+
+To make them printable, they need an `impl` with a function `fmt` which returns a string representation of the struct. If we do the following instead:
+
+```rust
+#[derive(Debug)]
+struct Foo {
+	bar: i32,
+}
+
+pub fn main() {
+	let foo = Foo { bar: 3 };
+	println!("{:?}", foo);
+}
+```
+
+result: 
+
+![image-20240730212834375](./assets/image-20240730212834375.png)
+
+can get the code from day_9_3.
+
+## Anchor #[pragram]
+
+The attribute #[pragram] is modifying the module behind the scenes. For example, it implements a router that automatically directs incoming blockchain instructions to the appropriate functions within the module.
 
 
 
 ## Key takeaways
 
+- An impl is a group of functions that operate on a struct. They are “attached” to the struct by using the same name as the struct.
+- A trait enforces that an impl implements certain functions
+- An attribute-like macro takes in a struct and can completely rewrite it.
+- A derive macro augments a struct with additional functions.
+
 
 
 ## Links
 
-- Day_8 original article: https://www.rareskills.io/post/rust-attribute-derive-macro
-- source code:
+- day_9 original article: https://www.rareskills.io/post/rust-attribute-derive-macro
+- source code: https://github.com/dukedaily/solana-expert-code/tree/day_9
