@@ -1,12 +1,10 @@
-
+# Function-like macro
 
 ![rust function-like macros](./assets/706568_60a26cb76a6b4396b529e8a4837d50fc~mv2.jpg)
 
 what is msg!() and println!() in our previous code base, why is there a exclamation point(!) after it? We will explain it in this session.
 
 
-
-## Function-like macro
 
 As a `strongly typed language`, rust cannot accept an arbitrary number of arguments to a function, for example, in Python, the following code works, cos python is a `weakly typed language` .
 
