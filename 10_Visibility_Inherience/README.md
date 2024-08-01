@@ -195,10 +195,68 @@ This shows that `private_func` is not publicly accessible and cannot be invoked 
 
 
 
-## Key Takeaways
+## Rust Module
+
+Let's split our code into separate files to better manage our codebase. We can use the `mod` keyword to achieve this.
+
+```sh
+anchor new day_10_1
+```
+
+create a file `calculate.rs`with the following code:
+
+```rust
+pub fn add(a: u64, b: u64) -> u64 {
+    a + b
+}
+
+pub fn sub(a: u64, b: u64) -> u64 {
+    a - b
+}
+```
+
+import calculate within `lib.rs`
+
+```rust
+use anchor_lang::prelude::*;
+
+declare_id!("AeRhxgytoVWqgZuzXz9R6qgphF9jJ9yoeFbHjNFBZBFf");
+pub mod calculate;
+
+#[program]
+pub mod day_10_1 {
+    use super::*;
+
+    pub fn myAdd(_ctx: Context<Initialize>, a: u64, b: u64) -> Result<()> {
+        let res = calculate::add(a, b);
+        msg!("Result: {:?}", res); // a: 10, b: 20, res: 30
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct Initialize {}
+```
+
+Be careful with the way that we import mod `calculate`, should be the same.
+
+![image-20240801214059151](./assets/image-20240801214059151.png)
+
+Build successfully.
+
+```sh
+ anchor build -p day_10_1
+```
+
+
+
+## Key takeaways
 
 1. functions under `#[program]` mod must be public: Adding `pub` keyword prior to function names
 2. it's allowed to declare functions without pub inside the files out of a mod
+3. A file's name is also it's module name
+
+
 
 ## Links
 
