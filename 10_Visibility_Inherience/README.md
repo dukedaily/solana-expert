@@ -195,7 +195,7 @@ This shows that `private_func` is not publicly accessible and cannot be invoked 
 
 
 
-## Key takeaways
+## Key Takeaways
 
 1. functions under `#[program]` mod must be public: Adding `pub` keyword prior to function names
 2. it's allowed to declare functions without pub inside the files out of a mod

@@ -143,6 +143,17 @@ fix air journey asthma help pulse ankle jeans return fragile renew equal
 ========================================================================
 ```
 
+## Get Wallet address
+
+```sh
+solana-keygen pubkey ~/.config/solana/id.json
+
+# output:
+HjU6xSZme7ER6Qhk841nczwXijBZ9e1GWLqdPxW6gS9w
+```
+
+
+
 ### Sol Airdrop
 
 ```sh

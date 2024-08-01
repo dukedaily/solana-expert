@@ -122,7 +122,7 @@ the `initialize`function called successfully!
 
 
 
-## Key Takeways
+## Key Takeaways
 
 1. solana support upgradibility natively and can forfeit afterwards.
 

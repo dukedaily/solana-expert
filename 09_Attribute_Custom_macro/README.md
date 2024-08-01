@@ -342,7 +342,7 @@ The attribute #[pragram] is modifying the module behind the scenes. For example,
 
 
 
-## Key takeaways
+## Key Takeaways
 
 - An impl is a group of functions that operate on a struct. They are “attached” to the struct by using the same name as the struct.
 - A trait enforces that an impl implements certain functions

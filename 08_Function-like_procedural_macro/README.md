@@ -103,7 +103,7 @@ There are three more types of macro we use for every solan programs, we will cov
 
 
 
-## key takeaways
+## Key Takeaways
 
 - function-like is very convenient in writing rust code.
 - Function-like macro/attribute-like macro/custom derive macro
