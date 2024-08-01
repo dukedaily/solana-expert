@@ -12,7 +12,7 @@ source code: [Hit me harder](https://github.com/dukedaily/solana-expert-code/tre
 
 
 
-## Index
+**Module1: Introductory Topics**
 
 * [00_Tools](00_Tools/README.md)
 * [01_Helloworld](01_Helloworld/README.md)
@@ -20,8 +20,13 @@ source code: [Hit me harder](https://github.com/dukedaily/solana-expert-code/tre
 * [03_Anchor_Program_IDL](03_Anchor_Program_IDL/README.md)
 * [04_Error_Handler](04_Error_Handler/README.md)
 * [05_Upgrade_Interact](05_Upgrade_Interact/README.md)
+
+**Module2: The minimum Rust you need to know**
+
 * [06_Rust_Basic_Syntax](06_Rust_Basic_Syntax/README.md)
 * [07_Rust_Interesting_Syntax](07_Rust_Interesting_Syntax/README.md)
 * [08_Function-like_procedural_macro](08_Function-like_procedural_macro/README.md)
 * [09_Attribute_Custom_macro-like_procedural_macro](09_Attribute_Custom_macro/README.md)
 * [10_Visibility_Inherience](10_Visibility_Inherience/README.md)
+
+**Module3: Important System-level Information in Solana**
