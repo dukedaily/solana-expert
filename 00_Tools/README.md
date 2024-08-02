@@ -9,6 +9,7 @@
 3. Rust Example: https://doc.rust-lang.org/rust-by-example/index.html (we only need to master 20% of Rust to become competent.)
 4. Rust Playground: https://play.rust-lang.org/
 5. Solang: https://solang.readthedocs.io/en/latest/running.html (A tool to convert solidity into rust, experimental)
+6. solana doc: https://docs.solanalabs.com/
 
 
 
