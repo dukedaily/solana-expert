@@ -1,4 +1,6 @@
-![solana clock](https://static.wixstatic.com/media/935a00_55b04d2394f04f7781fdee936109b747~mv2.jpg/v1/fill/w_1480,h_832,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/935a00_55b04d2394f04f7781fdee936109b747~mv2.jpg)
+# BLOCK VARIABLES
+
+![solana clock](./assets/935a00_55b04d2394f04f7781fdee936109b747~mv2.jpg)
 
 Today we will cover the analogs of all the block variables from solidity. Not all of them have 1-1 analogs. In solidity, we have the following commonly used block variables:
 
